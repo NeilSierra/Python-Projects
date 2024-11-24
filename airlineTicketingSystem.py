@@ -558,3 +558,4 @@ while True:
   if getTicketClass(): continue
   if getPayment(): continue
   if printTickets(): continue
+  break
