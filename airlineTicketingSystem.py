@@ -384,6 +384,7 @@ def calcTime(x):
   if x == 24:
     return "12:00 PM"
   if x > 12:
+    x -= 12
     return f"{x:02d}:00 PM"
   else:
     return f"{x:02d}:00 AM"
