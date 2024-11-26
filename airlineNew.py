@@ -322,39 +322,3 @@ systemDict = {
   "code_class2": "BCLASS",
   "code_class3": "FCLASS"
 }
-
-# Message prompt for getOrigin
-def getOrigin_message():
-  print("\n✈️   Hello and Welcome to Python Ticketing Airlines! 🌍" +
-        "\n\nHere we serve our travelers with the outmost..." +
-        "\n⚡ Efficiency, 🛡️  Safety and 🔐 Security!" +
-        "\n\n===============================================================================================" +
-        "\n📍 Choose an ORIGIN airport:")
-  for n in range(len(airportList)):
-    print(f"   {n + 1}. {systemDict["name_" + airportList[n]]}")
-
-# Function for getting the origin
-def getOrigin():
-  global airportList, origin, origin_name, origin_location
-  airportList = ["airport1", "airport2", "airport3", "airport4", "airport5", "airport6"]
-  getOrigin_message()
-  while True:
-    userInput = input(f"\n>> 📋 Enter choice (1-{len(airportList)}): ")
-    try:
-      if 1 <= int(userInput) <= len(airportList):
-        origin = airportList[int(userInput) - 1]
-        origin_name = systemDict["name_" + origin]
-        origin_location = systemDict["location_" + origin]
-        airportList.remove(origin)
-        print(f">> 🛫 Origin Airport: {origin_name}")
-        break
-    except ValueError:
-      print(f">> ❌ Invalid input: '{userInput}'")
-      continue
-    else:
-      print(f">> ❌ Enter a valid choice!")
-
-while True:
-  getOrigin()
-
-
