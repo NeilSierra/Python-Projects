@@ -323,16 +323,6 @@ systemDict = {
   "First Class": "FCLASS"
 }
 
-import os
-import platform
-import time
-
-def clear_terminal():
-  if platform.system() == "Windows":
-    os.system("cls")
-  else:
-    os.system("clear")
-
 def getOrigin():
   global airportList, origin, originName, originLocation
   airportList = ["airport1", "airport2", "airport3", "airport4", "airport5", "airport6"]
@@ -374,7 +364,6 @@ def getDestination():
       return False
     elif userInput.lower() == "x":
       print(">> 🔄 Restarting selection...")
-      time.sleep(3)
       return True
     else:
       print(f">> ❌ Invalid input: '{userInput}'")
@@ -437,7 +426,6 @@ def getFlightSchedule():
         continue
     elif userInput.lower() == "x":
       print(">> 🔄 Restarting selection...")
-      time.sleep(3)
       return True
     else:
       print(f">> ❌ Invalid input: '{userInput}'")
@@ -465,7 +453,6 @@ def getTicketCount():
       return False
     elif userInput.lower() == "x":
       print(">> 🔄 Restarting selection...")
-      time.sleep(3)
       return True
     else:
       print(f">> ❌ Invalid input: '{userInput}'")
@@ -496,7 +483,6 @@ def getTicketClass():
       return False
     elif userInput.lower() == "x":
       print(">> 🔄 Restarting selection...")
-      time.sleep(3)
       return True
     else:
       print(f">> ❌ Invalid input: '{userInput}'")
@@ -540,18 +526,15 @@ def printTickets():
     userInput = input(f"\n>> 📋 Would you like to run the system again? (Yes/No): ")
     if userInput.lower() == "yes":
       print(">> 🔄 Restarting the system...")
-      time.sleep(3)
       return True
     elif userInput.lower() == "no":
       print(">> Closing the system in 5 seconds...")
-      time.sleep(5)
       return False
     else:
       print(f">> ❌ Invalid input: '{userInput}'")
       continue
 
 while True:
-  clear_terminal()
   getOrigin()
   if getDestination(): continue
   if getFlightSchedule(): continue
@@ -560,3 +543,5 @@ while True:
   if getPayment(): continue
   if printTickets(): continue
   break
+else:
+  print("\n>> ✈️   Thank you for using our system!")
