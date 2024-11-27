@@ -1,3 +1,4 @@
+# Total airports list
 airportList = ["airport1", "airport2", "airport3", "airport4", "airport5", "airport6"]
 
 # Airplane capacity and model names 
@@ -310,5 +311,37 @@ sysDict = {
   }
 }
 
+# Function for getting the origin input
+def getOrigin():
+  global airportList, origin
+  # Resets the airports list
+  airportList = ["airport1", "airport2", "airport3", "airport4", "airport5", "airport6"]
+  # Prompt message
+  print("\n✈️   Hello and Welcome to Python Ticketing Airlines! 🌍" +
+        "\n\nHere we serve our travelers with the outmost..." +
+        "\n⚡ Efficiency, 🛡️  Safety and 🔐 Security!" +
+        "\n\n" + "=" * 95 +
+        "\n\n📍 Choose an ORIGIN airport:")
+  # Print all airport names
+  for n in range(len(airportList)):
+    print(f"   {n + 1}. {sysDict[airportList[n]]["name"]}")
+  # Handles user inputs
+  while True:
+    try:
+      # Ask for user input
+      userInput = input(f"\n>> 📋 Enter choice (1-{len(airportList)}): ")
+      # Checks if user input is an integer and is in the range
+      if 1 <= int(userInput) <= len(airportList):
+        # Set origin from user input
+        origin = airportList[int(userInput) - 1]
+        # Remove origin to the list
+        airportList.remove(origin)
+        print(f">> 🛫 Origin Airport: {sysDict[origin]["name"]}")
+        break
+      # If user input is not within the range
+      print(f">> ❌ Invalid input: '{userInput}'")
+    except Exception as e:
+      # Error message
+      print(f">> ❌ Error: {e}")
 
-print(f"{sysDict["airport1"]["name"]}")
+getOrigin()
