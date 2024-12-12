@@ -1,31 +1,25 @@
+aircrafts = {
+  1: [200, "Boeing 777"],
+  2: [175, "Airbus A350 XWB"],
+  3: [150, "Boeing 787 Dreamliner"],
+  4: [125, "Airbus A320 Family"]
+}
+
 airports = {
   1: {
     "name": "UAE - Dubai International Airport",
     "location": "Dubai, United Arab Emirates",
     # Routes Available
     2: {
-      "duration": 7.5,
-      1: ["12/01/2024", "04:00 AM", 100, 100, 122, "Airbus A320 Family"],
-      2: ["12/01/2024", "04:00 AM", 100, 100, 148, "Boeing 787 Dreamliner"],
-      3: ["12/01/2024", "04:00 AM", 100, 100, 175, "Airbus A350 XWB"],
-      4: ["12/01/2024", "04:00 AM", 100, 100, 198, "Boeing 777"]
+      #   Date        Take-off    $$   PAX  Aircraft
+      1: ["12/01/24", "04:00 AM", 400, 100, aircrafts[1]],
+      2: ["12/08/24", "08:00 AM", 400, 100, aircrafts[2]],
+      3: ["12/15/24", "12:00 PM", 400, 100, aircrafts[3]]
     },
-    3: {
-      "duration": 8,
-      1: ["12/02/2024", 16, model3, 520, 295]
-    },
-    4: {
-      "duration": 15,
-      1: ["12/02/2024", 16, model3, 520, 295]
-    },
-    5: {
-      "duration": 8.5,
-      1: ["12/04/2024", 16, model3, 420, 278]
-    },
-    6: {
-      "duration": 9.5,
-      1: ["12/05/2024", "04:00 AM", model1, 600, 371]
-    }
+    3: {},
+    4: {},
+    5: {},
+    6: {}
   },
   2: {
     "name": "CHN - Guangzhou Baiyun International Airport",
