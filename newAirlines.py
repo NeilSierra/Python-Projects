@@ -165,6 +165,7 @@ def getRoute():
   for n in range(len(airports)):
     n += 1
     print(f"{n}. {airports[n]["name"]}")
+  print("Enter 'X' to restart the system.")
   while True:
     org = input("\nChoose an Origin: ")
     if org.isdigit() and 1 <= int(org) <= len(airports):
@@ -190,11 +191,36 @@ def getRoute():
     else:
       print("Invalid input! Please try again.")
 
+def calcSeats(x, y):
+  if x == y:
+    return f"❌ FULL"
+  return f"{x:03d}/{y:03d}"
+
 def getFlight():
+  global flight
   print("\nFlight Schedule:")
+  print(f"+{"-"*11}+{"-"*10}+{"-"*10}+{"-"*10}+{"-"*9}+{"-"*23}+")
+  print(f"| {"Flt #":^9} | {"Date":^8} | Take-off | {"Cost":^8} | {"Seats":^7} | {"Aircraft":^21} |")
+  print(f"+{"-"*11}+{"-"*10}+{"-"*10}+{"-"*10}+{"-"*9}+{"-"*23}+")
   for n in range(len(airports[origin][destination])):
     n += 1
-    print(f"{n} {airports[origin][destination][n]}")
+    x = airports[origin][destination][n]
+    y = f"{x[2]:.2f}"
+    print(f"| Flight #{n} | {x[0]} | {x[1]} | ${y:^7} | {calcSeats(x[3], x[4][0]):^7} | {x[4][1]:^21} |")
+  print(f"+{"-"*11}+{"-"*10}+{"-"*10}+{"-"*10}+{"-"*9}+{"-"*23}+")
+  print("Enter 'X' to restart the system.")
+  while True:
+    flt = input("\nChoose a Flight Schedule: ")
+    if flt.isdigit() and 1 <= int(flt) <= len(airports[origin][destination][n]):
+      flight = int(flt)
+      print(f"Chosen flight schedule #{flight}.")
+      break
+    elif flt == "x":
+      print("Restarting...")
+      return True
+    else:
+      print("Invalid input! Please try again.")
 
 while True:
   if getRoute(): continue
+  if getFlight(): continue
