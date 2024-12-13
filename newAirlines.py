@@ -1,8 +1,8 @@
 aircrafts = {
-  1: [200, "Boeing 777"],
-  2: [175, "Airbus A350 XWB"],
-  3: [150, "Boeing 787 Dreamliner"],
-  4: [125, "Airbus A320 Family"]
+  1: [200, "Boeing 777", 1],
+  2: [175, "Airbus A350 XWB", 2],
+  3: [150, "Boeing 787 Dreamliner", 3],
+  4: [125, "Airbus A320 Family", 4]
 }
 
 airports = {
@@ -179,7 +179,7 @@ def getRoute():
       print(f"Chosen {airports[origin]["name"]} as the origin airport.")
       break
     elif org == "x":
-      print("Restarting...")
+      print("Restarting...\n\n\n\n\n")
       return True
     else:
       print("Invalid input! Please try again.")
@@ -192,7 +192,7 @@ def getRoute():
       print(f"Chosen {airports[destination]["name"]} as the origin airport.")
       break
     elif dtn == "x":
-      print("Restarting...")
+      print("Restarting...\n\n\n\n\n")
       return True
     else:
       print("Invalid input! Please try again.")
@@ -203,7 +203,7 @@ def calcSeats(x, y):
   return f"{x:03d}/{y:03d}"
 
 def getFlight():
-  global flight
+  global flight, flightNum
   print("\nFlight Schedule:")
   print(f"+{"-"*11}+{"-"*10}+{"-"*10}+{"-"*10}+{"-"*9}+{"-"*23}+")
   print(f"| {"Flt #":^9} | {"Date":^8} | Take-off | {"Cost":^8} | {"Seats":^7} | {"Aircraft":^21} |")
@@ -218,17 +218,18 @@ def getFlight():
   while True:
     flt = input("\nChoose a Flight Schedule: ")
     if flt.isdigit() and 1 <= int(flt) <= len(airports[origin][destination][n]):
+      flightNum = int(flt)
       flight = airports[origin][destination][int(flt)]
       print(f"Chosen flight schedule #{int(flt)}.")
       break
     elif flt == "x":
-      print("Restarting...")
+      print("Restarting...\n\n\n\n\n")
       return True
     else:
       print("Invalid input! Please try again.")
 
 def getTicket():
-  global ticketAmount, ticketClass
+  global ticketAmount, ticketClass, totalCost
   seatsLeft = flight[4][0] - flight[3]
   while True:
     tktAmt = input(f"\nEnter Ticket Amount ({seatsLeft} left): ")
@@ -236,7 +237,7 @@ def getTicket():
       ticketAmount = int(tktAmt)
       break
     elif tktAmt == "x":
-      print("Restarting...")
+      print("Restarting...\n\n\n\n\n")
       return True
     else:
       print("Invalid amount! Please try again.")
@@ -254,11 +255,49 @@ def getTicket():
     tktCls = input("\nChoose a Ticket Class: ")
     if tktCls.isdigit() and 1 <= int(tktCls) <= len(ticketClasses):
       ticketClass = ticketClasses[int(tktCls)]
+      totalCost = ticketAmount * ticketClass[0] * flight[2]
       print(f"Chosen {ticketClass[1]} as ticket class.")
+      print(f"Total cost of the tickets is ${totalCost:.2f}")
       break
     elif tktCls == "x":
-      print("Restarting...")
+      print("Restarting...\n\n\n\n\n")
       return True
+    else:
+      print("Invalid input! Please try again.")
+      
+def getPayment():
+  while True:
+    payment = input("\nEnter payment amount: $")
+    if payment.replace(".", "", 1).isdigit() and float(payment) >= totalCost:
+      print(f"Payment accepted! Change is ${float(payment) - totalCost:.2f}")
+      flight[3] += ticketAmount
+      break
+    elif payment == "x":
+      print("Restarting...\n\n\n\n\n")
+      return True
+    else:
+      print("Invalid input! Please try again.")
+
+def printTicketIDs():
+  print("\nPrinting ticket IDs...\n")
+  for n in range(ticketAmount):
+    seatNum = flight[3] + n + 1
+    date = f"M{flight[0][0:2]}D{flight[0][3:5]}Y{flight[0][6:8]}"
+    ticketID = f"PAL-OR{origin:02d}-DT{destination:02d}-{date}-FLT{flightNum:03d}-MDL{flight[4][2]:02d}-P{seatNum:03d}"
+    print(f"{ticketID:^80}")
+  print("\nAdditional Information:")
+  print("Seat number can be found for the last four digits of the ticket ID.")
+
+def restartSystem():
+  while True:
+    restart = input("\nWould you like to order again? (Yes/No): ")
+    if restart.lower() == "yes":
+      print("Running the system again...\n\n\n\n\n")
+      return True
+    elif restart.lower() == "no":
+      print("Closing the system...")
+      print("Thank you for using Python Airlines!\n")
+      return False
     else:
       print("Invalid input! Please try again.")
 
@@ -266,3 +305,7 @@ while True:
   if getRoute(): continue
   if getFlight(): continue
   if getTicket(): continue
+  if getPayment(): continue
+  printTicketIDs()
+  if restartSystem(): continue
+  else: break
