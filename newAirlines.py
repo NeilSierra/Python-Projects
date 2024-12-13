@@ -158,6 +158,12 @@ airports = {
   }
 }
 
+ticketClasses = {
+  1: [1, "Economy Class"],
+  2: [1.2, "Business Class"],
+  3: [1.5, "First Class"]
+}
+
 def getRoute():
   global origin, destination
   print("\nHello and Welcome to Python Airlines!")
@@ -212,10 +218,45 @@ def getFlight():
   while True:
     flt = input("\nChoose a Flight Schedule: ")
     if flt.isdigit() and 1 <= int(flt) <= len(airports[origin][destination][n]):
-      flight = int(flt)
-      print(f"Chosen flight schedule #{flight}.")
+      flight = airports[origin][destination][int(flt)]
+      print(f"Chosen flight schedule #{int(flt)}.")
       break
     elif flt == "x":
+      print("Restarting...")
+      return True
+    else:
+      print("Invalid input! Please try again.")
+
+def getTicket():
+  global ticketAmount, ticketClass
+  seatsLeft = flight[4][0] - flight[3]
+  while True:
+    tktAmt = input(f"\nEnter Ticket Amount ({seatsLeft} left): ")
+    if tktAmt.isdigit() and 1 <= int(tktAmt) <= seatsLeft:
+      ticketAmount = int(tktAmt)
+      break
+    elif tktAmt == "x":
+      print("Restarting...")
+      return True
+    else:
+      print("Invalid amount! Please try again.")
+  print("\nChoose ticket class:")
+  print(f"+---+{"-"*27}+{"-"*18}+{"-"*27}+")
+  print(f"| # | {"Aircraft":^25} | {"Multiplier":^16} | {"Total Cost":^25} |")
+  print(f"+---+{"-"*27}+{"-"*18}+{"-"*27}+")
+  for n in range(len(ticketClasses)):
+    n += 1
+    total = f"${ticketAmount * ticketClasses[n][0] * flight[2]:.2f}"
+    print(f"| {n} | {ticketClasses[n][1]:^25} | {str(ticketClasses[n][0]) + " x":^16} | {total:^25} |")
+  print(f"+---+{"-"*27}+{"-"*18}+{"-"*27}+")
+  print("Enter 'X' to restart the system.")
+  while True:
+    tktCls = input("\nChoose a Ticket Class: ")
+    if tktCls.isdigit() and 1 <= int(tktCls) <= len(ticketClasses):
+      ticketClass = ticketClasses[int(tktCls)]
+      print(f"Chosen {ticketClass[1]} as ticket class.")
+      break
+    elif tktCls == "x":
       print("Restarting...")
       return True
     else:
@@ -224,3 +265,4 @@ def getFlight():
 while True:
   if getRoute(): continue
   if getFlight(): continue
+  if getTicket(): continue
