@@ -428,4 +428,4 @@ while True:
   if getPayment(): continue
   printTicketIDs()
   if restartSystem(): continue
-  else: break
+  break
