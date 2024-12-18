@@ -1,10 +1,11 @@
+# Dictionary for the Aircrafts Models
 aircrafts = {
   1: [200, "Boeing 777", 1],
   2: [175, "Airbus A350 XWB", 2],
   3: [150, "Boeing 787 Dreamliner", 3],
   4: [125, "Airbus A320 Family", 4]
 }
-
+# Dictionary for the Airport Names, Location, Routes and Schedules
 airports = {
   1: {
     "name": "UAE - Dubai International Airport",
@@ -277,13 +278,13 @@ airports = {
     }
   }
 }
-
+# Dictionary for the Ticket Classes
 ticketClasses = {
   1: [1, "Economy Class"],
   2: [1.2, "Business Class"],
   3: [1.5, "First Class"]
 }
-
+# Function to get Origin and Destination
 def getRoute():
   global origin, destination
   print("\nHello and Welcome to Python Airlines!")
@@ -316,12 +317,12 @@ def getRoute():
       return True
     else:
       print("Invalid input! Please try again.")
-
+# Function to format and get the Seats Availability
 def calcSeats(x, y):
   if x == y:
     return f"❌ FULL"
   return f"{x:03d}/{y:03d}"
-
+# Function to get the Flight and FlightNum
 def getFlight():
   global flight, flightNum
   print("\nFlight Schedule:")
@@ -347,7 +348,7 @@ def getFlight():
       return True
     else:
       print("Invalid input! Please try again.")
-
+# Function to get the Ticket Amount, Class and Cost
 def getTicket():
   global ticketAmount, ticketClass, totalCost
   seatsLeft = flight[4][0] - flight[3]
@@ -384,7 +385,7 @@ def getTicket():
       return True
     else:
       print("Invalid input! Please try again.")
-      
+# Function to get the Payment
 def getPayment():
   while True:
     payment = input("\nEnter payment amount: $")
@@ -397,7 +398,7 @@ def getPayment():
       return True
     else:
       print("Invalid input! Please try again.")
-
+# Function for printing and formating the Ticket IDs
 def printTicketIDs():
   print("\nPrinting ticket IDs...\n")
   for n in range(ticketAmount):
@@ -407,7 +408,7 @@ def printTicketIDs():
     print(f"{ticketID:^80}")
   print("\nAdditional Information:")
   print("Seat number can be found for the last four digits of the ticket ID.")
-
+# Function to Restart the System
 def restartSystem():
   while True:
     restart = input("\nWould you like to order again? (Yes/No): ")
@@ -420,12 +421,13 @@ def restartSystem():
       return False
     else:
       print("Invalid input! Please try again.")
-
+# Main Loop of the system
 while True:
-  if getRoute(): continue
+  # Runs the functions and if true is returned then the system restarts
+  if getRoute(): continue 
   if getFlight(): continue
   if getTicket(): continue
   if getPayment(): continue
   printTicketIDs()
-  if restartSystem(): continue
-  break
+  if restartSystem(): continue 
+  break # Break for the system end
