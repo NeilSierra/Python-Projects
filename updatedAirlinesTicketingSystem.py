@@ -299,7 +299,7 @@ def getRoute():
       origin = int(org)
       print(f"Chosen {airports[origin]["name"]} as the origin airport.")
       break
-    elif org == "x":
+    elif org.lower() == "x":
       print("Restarting...\n\n\n\n\n")
       return True
     else:
@@ -312,7 +312,7 @@ def getRoute():
       destination = int(dtn)
       print(f"Chosen {airports[destination]["name"]} as the origin airport.")
       break
-    elif dtn == "x":
+    elif dtn.lower() == "x":
       print("Restarting...\n\n\n\n\n")
       return True
     else:
@@ -343,7 +343,7 @@ def getFlight():
       flight = airports[origin][destination][int(flt)]
       print(f"Chosen flight schedule #{int(flt)}.")
       break
-    elif flt == "x":
+    elif flt.lower() == "x":
       print("Restarting...\n\n\n\n\n")
       return True
     else:
@@ -357,7 +357,7 @@ def getTicket():
     if tktAmt.isdigit() and 1 <= int(tktAmt) <= seatsLeft:
       ticketAmount = int(tktAmt)
       break
-    elif tktAmt == "x":
+    elif tktAmt.lower() == "x":
       print("Restarting...\n\n\n\n\n")
       return True
     else:
@@ -380,7 +380,7 @@ def getTicket():
       print(f"Chosen {ticketClass[1]} as ticket class.")
       print(f"Total cost of the tickets is ${totalCost:.2f}")
       break
-    elif tktCls == "x":
+    elif tktCls.lower() == "x":
       print("Restarting...\n\n\n\n\n")
       return True
     else:
@@ -391,7 +391,6 @@ def getPayment():
     payment = input("\nEnter payment amount: $")
     if payment.replace(".", "", 1).isdigit() and float(payment) >= totalCost:
       print(f"Payment accepted! Change is ${float(payment) - totalCost:.2f}")
-      flight[3] += ticketAmount
       break
     elif payment == "x":
       print("Restarting...\n\n\n\n\n")
@@ -406,6 +405,7 @@ def printTicketIDs():
     date = f"M{flight[0][0:2]}D{flight[0][3:5]}Y{flight[0][6:8]}"
     ticketID = f"PAL-OR{origin:02d}-DT{destination:02d}-{date}-FLT{flightNum:03d}-MDL{flight[4][2]:02d}-P{seatNum:03d}"
     print(f"{ticketID:^80}")
+  flight[3] += ticketAmount
   print("\nAdditional Information:")
   print("Seat number can be found for the last four digits of the ticket ID.")
 # Function to Restart the System
