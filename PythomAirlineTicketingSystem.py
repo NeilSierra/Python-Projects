@@ -320,7 +320,7 @@ def getRoute():
 # Function to format and get the Seats Availability
 def calcSeats(x, y):
   if x == y:
-    return f"❌ FULL"
+    return f"❌FULL"
   return f"{x:03d}/{y:03d}"
 # Function to get the Flight and FlightNum
 def getFlight():
