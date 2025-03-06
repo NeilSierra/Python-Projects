@@ -59,11 +59,13 @@ def get_action(account):
                 print("| Thank you for using Python Online Bank! Closing system...")
                 return False
 
-while True:
-    print("\nHello and Welcome to Python Online Bank!" +
-        "\nTo proceed please log in your online bank account.")
-    
-    user_account = find_account()
-    if not attempt_login(user_account): break
-    if not get_action(user_account): break
+def main_loop():
+    while True:
+        print("\nHello and Welcome to Python Online Bank!" +
+            "\nTo proceed please log in your online bank account.")
+        
+        user_account = find_account()
+        if not attempt_login(user_account): break
+        if not get_action(user_account): break
 
+main_loop()
